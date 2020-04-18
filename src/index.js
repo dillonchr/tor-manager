@@ -1,13 +1,20 @@
-const process = require('child_process');
-const { buildLogger } = require('./logger.js');
-const log = buildLogger("tor");
+const IS_PROD = process.env.NODE_ENV === "production";
+const _process = require("child_process");
 
+// mute logs on prod
+let log = () => {};
+//  process handle for tor
 let tor;
+
+if (!IS_PROD) {
+  const { buildLogger } = require("./logger.js");
+  log = buildLogger("tor");
+}
 
 function killTor() {
   try {
     if (tor) {
-      tor.kill('SIGINT');
+      tor.kill("SIGINT");
     }
   } catch (killError) {
     log("Failed to kill tor process");
@@ -39,21 +46,29 @@ function startTor() {
       reject(new Error("tor is still running"));
     }
 
-    tor = process.spawn('tor');
-    tor.stdout.on('data', data => {
+    tor = _process.spawn("tor");
+    const onData = data => {
       const msg = data.toString();
       log(msg);
 
       if (/Bootstrapped 100%|Is Tor already running\?/.test(msg)) {
         resolve();
+
+        //  tidying up listener
+        tor.stdout.removeListener("data", onData);
       }
-    });
+    };
+
+    tor.stdout.on("data", onData);
   });
 }
 
 module.exports = {
-  startTor,
-  restartTor,
+  kill: killTor,
   killTor,
+  restart: restartTor,
+  restartTor,
+  start: startTor,
+  startTor,
 };
 

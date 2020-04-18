@@ -11,10 +11,10 @@ const client = axios.create({httpsAgent});
 async function main() {
   log("hello there");
 
-  await tor.startTor();
+  await tor.start();
   log("tor assumes it's ready");
   await checkIp();
-  await tor.killTor();
+  await tor.kill();
   log("goodbye");
 }
 
