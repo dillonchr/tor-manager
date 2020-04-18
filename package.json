@@ -1,0 +1,14 @@
+{
+  "name": "fff",
+  "version": "0.0.0",
+  "description": "welcome to torget, fast fun and friendly",
+  "main": "src/index.js",
+  "repository": "https://github.com/dillonchr/fff",
+  "author": "dillonchr",
+  "license": "GPL-2.0",
+  "private": false,
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "socks-proxy-agent": "^5.0.0"
+  }
+}
