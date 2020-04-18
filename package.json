@@ -1,5 +1,5 @@
 {
-  "name": "fff",
+  "name": "@dillonchr/tor-manager",
   "version": "0.0.0",
   "description": "welcome to torget, fast fun and friendly",
   "main": "src/index.js",
