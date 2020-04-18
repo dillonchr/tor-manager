@@ -1,6 +1,6 @@
 {
   "name": "@dillonchr/tor-manager",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "welcome to torget, fast fun and friendly",
   "main": "src/index.js",
   "repository": "https://github.com/dillonchr/fff",
